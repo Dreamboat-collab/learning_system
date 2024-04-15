@@ -4,13 +4,11 @@ import com.example.learning_system.mapper.EmpMapper;
 import com.example.learning_system.pojo.Emp;
 import com.example.learning_system.pojo.PageBean;
 import com.example.learning_system.service.EmpService;
-import com.github.pagehelper.Page;
-import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -36,5 +34,28 @@ public class EmpServiceImpl implements EmpService {
         //将结果封装
         PageBean pageBean = new PageBean(total,rows);
         return pageBean;
+    }
+
+    @Override
+    public void delete(List<Integer> ids) {
+        empMapper.delete(ids);
+    }
+
+    @Override
+    public void insert(Emp emp) {
+        emp.setCreateTime(LocalDateTime.now());
+        emp.setUpdateTime(LocalDateTime.now());
+        empMapper.insert(emp);
+    }
+
+    @Override
+    public Emp getById(Integer id) {
+        return empMapper.getById(id);
+    }
+
+    @Override
+    public void update(Emp emp) {
+        emp.setUpdateTime(LocalDateTime.now());
+        empMapper.update(emp);
     }
 }
