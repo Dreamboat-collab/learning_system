@@ -27,6 +27,10 @@ public interface EmpMapper {
 
     void update(Emp emp);
 
+    @Select("SELECT * FROM tlias.emp WHERE username=#{username} and password=#{password}")
+    Emp geyByUsernamePassword(Emp emp);
+
+
     //PageHelper分页查询
 //    @Select("SELECT * FROM tlias.emp")
 //    List<Emp> list();
